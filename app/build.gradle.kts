@@ -3,15 +3,15 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.demkin.childtracker"
+    namespace = "com.spchief87.childtracker"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.demkin.childtracker"
+        applicationId = "com.spchief87.childtracker"
         minSdk = 30
         targetSdk = 36
         versionCode = 1
@@ -41,10 +41,12 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.service)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -55,11 +57,12 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.okhttp.logging)
 
     // WorkManager
     implementation(libs.androidx.work.runtime.ktx)
@@ -69,7 +72,9 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.work)
+    implementation(libs.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
